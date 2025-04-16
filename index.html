@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <title>シーザー暗号解読（ゴリ押し）</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="text1" size="100" value="sirujimu">
+        <input type="button" id="excution" value="実行">
+    </div>
+ 
+	<script>
+     const text = document.getElementById("text1");
+    const exc = document.getElementById("excution");
+    const boin = ["a","i","u","e","o"];
+    const siin = ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z"];
+
+exc.onclick = function(){
+
+    let strs =  text.value.split('');
+
+    //母音ループ
+    for(let a=0;a<boin.length;a++){
+
+        //子音ループ
+        for(let b=0;b<siin.length;b++){
+
+            let result = "";
+            //ずらす
+            for(let i=0;i<strs.length;i++){
+
+                for(let j=0;j<21;j++){
+
+                if(strs[i] == siin[j]){
+                     let offset = b+j;
+                     if(b+j >= siin.length) offset += -21;
+                     result = result+siin[offset]
+                }
+
+                if(j >= 5)continue;
+
+                if(strs[i] == boin[j]){
+                    let offset = a+j;
+                    if(j+a >= boin.length) offset += -5;
+                    result = result+boin[offset]
+                }
+                }
+            }
+            document.write("母音"+a+"右ずらし,子音"+b+"右ずらし : <b>"+result + "</b></br>");
+        }
+    }
+}
+    </script>
+</body>
+</html>
